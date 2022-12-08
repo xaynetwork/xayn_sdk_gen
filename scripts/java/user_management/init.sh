@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 
 cd $JAVA_WKDIR_USERS || exit
 

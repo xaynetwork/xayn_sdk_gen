@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 
 cd $JS_WKDIR_USERS || exit
 

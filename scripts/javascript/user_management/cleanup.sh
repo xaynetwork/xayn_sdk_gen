@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 
 ## remove unwanted output
 if [ -d $JS_TEMPLATE_USERS ]; then rm -Rf $JS_WKDIR_USERS/test; fi

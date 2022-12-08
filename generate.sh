@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
 
 # --------------------------
 # init section
 # --------------------------
 
-# fetch the JAR for codegen
-wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.2.1/openapi-generator-cli-6.2.1.jar -O openapi-generator-cli.jar
+# fetch the JAR for codegen if needed
+[ ! -f openapi-generator-cli.jar ] &&  curl https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.2.1/openapi-generator-cli-6.2.1.jar > openapi-generator-cli.jar
 # reset targets directory
 if [ -d "./targets" ]; then rm -Rf ./targets; fi
 mkdir ./targets
