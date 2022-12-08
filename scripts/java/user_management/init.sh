@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd $JAVA_WKDIR_USERS
+cd $JAVA_WKDIR_USERS || exit
 
 chmod +x gradlew
 ./gradlew
 
-cd -
+cd - || exit

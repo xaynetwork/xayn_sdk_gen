@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $JS_WKDIR_USERS
+cd $JS_WKDIR_USERS || exit
 
 npm --endpoint=$ENDPOINT_USERS --token=$TOKEN_USERS run test
 
@@ -11,4 +11,4 @@ else
   JS_TEST_USERS=0
 fi
 
-cd -
+cd - || exit
