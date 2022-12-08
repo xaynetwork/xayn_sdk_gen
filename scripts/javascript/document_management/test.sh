@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd $JS_WKDIR_DOCUMENTS
 
 npm --endpoint=$ENDPOINT_DOCUMENTS --token=$TOKEN_DOCUMENTS run test

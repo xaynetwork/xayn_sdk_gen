@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd $JS_WKDIR_USERS
 
 ## npm commands
