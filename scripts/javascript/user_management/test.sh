@@ -2,7 +2,7 @@
 set -e
 source scripts/javascript/common.sh
 
-cd $JS_WKDIR_USERS || exit
+cd $WKDIR_USERS || exit
 
 npm --endpoint=$ENDPOINT --token=$TOKEN_USERS run test
 

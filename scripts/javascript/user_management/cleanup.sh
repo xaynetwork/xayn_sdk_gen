@@ -4,7 +4,7 @@ source scripts/javascript/common.sh
 
 
 ## remove unwanted output
-if [ -d $JS_TEMPLATE_USERS ]; then rm -Rf $JS_WKDIR_USERS/test; fi
-rm -Rf $JS_WKDIR_USERS/.travis.yml
-rm -Rf $JS_WKDIR_USERS/git_push.sh
-cp -R $JS_TEMPLATE_USERS $JS_WKDIR_USERS/test
+if [ -d $TEMPLATE_USERS ]; then rm -Rf $WKDIR_USERS/test; fi
+rm -Rf $WKDIR_USERS/.travis.yml
+rm -Rf $WKDIR_USERS/git_push.sh
+cp -R $TEMPLATE_USERS $WKDIR_USERS/test
