@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+source scripts/java/common.sh
 
 ## remove unwanted output
 #if [ -d $JAVA_TEMPLATE_DOCUMENTS ]; then rm -Rf $JAVA_WKDIR_DOCUMENTS/test; fi

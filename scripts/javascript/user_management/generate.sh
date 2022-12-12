@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+source scripts/javascript/common.sh
 
 
 ## run JavaScript codegen
