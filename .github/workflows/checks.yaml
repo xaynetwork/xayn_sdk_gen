@@ -16,6 +16,7 @@ jobs:
           shell: bash
 
       - name: Set environment variables
+        run: echo "Setting environment variables"
         env:
           JS_WKDIR_DOCUMENTS: ./targets/javascript/document_management
           JS_WKDIR_USERS: ./targets/javascript/user_management
