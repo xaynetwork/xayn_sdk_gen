@@ -16,7 +16,6 @@ jobs:
           shell: bash
 
       - name: Set environment variables
-        run: echo "Setting environment variables"
         env:
           JS_WKDIR_DOCUMENTS: ./targets/javascript/document_management
           JS_WKDIR_USERS: ./targets/javascript/user_management
@@ -26,10 +25,7 @@ jobs:
           TOKEN_USERS: ${{ secrets.TOKEN_DOCUMENTS }}
 
       - name: Run tests
-        uses: actions/run-test-suite
+        working-directory: ./scripts/javascript
         run: |
-          cd scripts/javascript/document_management/test.sh
-          sh test.sh
-          cd -
-          cd scripts/javascript/user_management/test.sh
-          sh test.sh
+          sh /document_management/test.sh
+          sh /user_management/test.sh
