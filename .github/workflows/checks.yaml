@@ -1,0 +1,23 @@
+name: Run tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run document management tests
+        working-directory: ./targets/javascript/document_management
+        run: |
+          npm install
+          npm --endpoint=${{ secrets.ENDPOINT }} --token=${{ secrets.TOKEN_DOCUMENTS }} run test
+
+      - name: Run user management tests
+        working-directory: ./targets/javascript/user_management
+        run: |
+          npm install
+          npm --endpoint=${{ secrets.ENDPOINT }} --token=${{ secrets.TOKEN_USERS }} run test
