@@ -2,8 +2,8 @@ name: Generate SDKs
 
 on:
   push:
-    refs:
-      - refs/tags/*
+    tags:
+      - '*'
 
 jobs:
   build:
