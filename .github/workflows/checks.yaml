@@ -23,9 +23,11 @@ jobs:
       - name: Run document management tests
         working-directory: ./scripts/javascript/document_management
         run: |
+          npm install
           sh test.sh
 
       - name: Run user management tests
         working-directory: ./scripts/javascript/user_management
         run: |
+          npm install
           sh test.sh    
