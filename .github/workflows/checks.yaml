@@ -24,10 +24,10 @@ jobs:
         working-directory: ./targets/javascript/document_management
         run: |
           npm install
-          sh ../../../scripts/javascript/document_management/test.sh
+          npm --endpoint=$ENDPOINT_DOCUMENTS --token=$TOKEN_DOCUMENTS run test
 
       - name: Run user management tests
         working-directory: ./targets/javascript/user_management
         run: |
           npm install
-          sh ../../../scripts/javascript/user_management/test.sh    
+          npm --endpoint=$ENDPOINT_USERS --token=$TOKEN_USERS run test
