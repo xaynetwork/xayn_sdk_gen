@@ -1,0 +1,19 @@
+name: Generate SDKs
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run code generation
+      run: bash ./generate.sh
+      env:
+        VERSION: ${{ github.ref }}
+        ENDPOINT: ${{ secrets.ENDPOINT }}
+        TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+        TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
