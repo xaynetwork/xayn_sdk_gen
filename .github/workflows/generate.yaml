@@ -17,3 +17,4 @@ jobs:
         ENDPOINT: ${{ secrets.ENDPOINT }}
         TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
         TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
+        SOURCE_REPO: ${{ github.repository }}

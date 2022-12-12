@@ -12,6 +12,34 @@ function codegen() {
   ./scripts/$1/user_management/test.sh
 }
 
+function push_to_designated_repo() {
+  TARGET_REPO_DOCUMENTS="https://github.com/xaynetwork/xayn_documents_sdk_$1.git"
+  TARGET_REPO_USERS="https://github.com/xaynetwork/xayn_users_sdk_$1.git"
+  SOURCE_FOLDER_DOCUMENTS="./targets/$1/document_management"
+  SOURCE_FOLDER_USERS="./targets/$1/user_management"
+  TARGET_FOLDER="./src"
+
+  git clone $TARGET_REPO_DOCUMENTS
+  rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER_DOCUMENTS $TARGET_REPO_DOCUMENTS/$TARGET_FOLDER
+  cd $TARGET_REPO_DOCUMENTS
+  git add -A
+  git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
+  git push
+  git tag $VERSION
+  git push --tags
+  cd -
+
+  git clone $TARGET_REPO_USERS
+  rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER_USERS $TARGET_REPO_USERS/$TARGET_FOLDER
+  cd $TARGET_REPO_USERS
+  git add -A
+  git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
+  git push
+  git tag $VERSION
+  git push --tags
+  cd -
+}
+
 # --------------------------
 # init section
 # --------------------------
@@ -30,4 +58,5 @@ for (( i = 0; i < ${#TARGETS[@]} ; i++ )); do
     printf "\n**** Running: ${target} *****\n\n"
 
     codegen $target
+    push_to_designated_repo $target
 done
