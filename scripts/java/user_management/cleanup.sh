@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 
 ## remove unwanted output
 #if [ -d $JAVA_TEMPLATE_USERS ]; then rm -Rf $JAVA_WKDIR_USERS/test; fi
