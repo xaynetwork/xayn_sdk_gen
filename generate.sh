@@ -19,7 +19,7 @@ export LANG_JS="javascript"
 export LANG_JAVA="java"
 
 export LICENSE_NAME="Apache-2.0"
-export VERSION="0.0.1"
+#export VERSION="0.0.1"
 export PROJNAME_DOCUMENTS="xayn_document_management_sdk"
 export PROJNAME_USERS="xayn_user_management_sdk"
 export PKG_DOCUMENTS="com.xayn.documents"

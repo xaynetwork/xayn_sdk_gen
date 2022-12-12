@@ -1,0 +1,21 @@
+name: Generate SDKs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run code generation
+      run: |
+        echo The chosen version is $VERSION
+        sh ./generate.sh
+      env:
+        VERSION: ${{ inputs.VERSION }}
+
+inputs:
+  FIRST_PARAM:
+    description: Enter the (semantic) version number
+    required: true
