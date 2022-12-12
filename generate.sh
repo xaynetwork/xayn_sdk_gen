@@ -2,46 +2,39 @@
 set -e
 
 function codegen() {
-  ./scripts/$1/document_management/generate.sh
-  ./scripts/$1/user_management/generate.sh
-  ./scripts/$1/document_management/cleanup.sh
-  ./scripts/$1/user_management/cleanup.sh
-  ./scripts/$1/document_management/init.sh
-  ./scripts/$1/user_management/init.sh
-  ./scripts/$1/document_management/test.sh
-  ./scripts/$1/user_management/test.sh
+  DIRS=("document_management" "user_management")
+
+  for (( i = 0; i < ${#DIRS[@]} ; i++ )); do
+    DIR=${DIRS[$i]}
+
+    ./scripts/$1/$DIR/generate.sh
+    ./scripts/$1/$DIR/cleanup.sh
+    ./scripts/$1/$DIR/init.sh
+    ./scripts/$1/$DIR/test.sh
+    ./scripts/$1/$DIR/pre_sync.sh
+  done
 }
 
 function push_to_designated_repo() {
-  TARGET_REPO_DOCUMENTS="git@github.com:xaynetwork/xayn_documents_sdk_$1.git"
-  TARGET_REPO_USERS="git@github.com:xaynetwork/xayn_users_sdk_$1.git"
-  SOURCE_FOLDER_DOCUMENTS="./targets/$1/document_management"
-  SOURCE_FOLDER_USERS="./targets/$1/user_management"
-  TARGET_FOLDER="./"
+  PROJS=("document" "user")
 
-  # todo: some cleanup for every target that is more generic...
-  rm -rf $SOURCE_FOLDER_DOCUMENTS/node_modules/
-  rm -rf $SOURCE_FOLDER_USERS/node_modules/
+  for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
+    PROJ=${PROJS[$i]}
+    TARGET_REPO="git@github.com:xaynetwork/xayn_${PROJ}s_sdk_$1.git"
+    SOURCE_FOLDER="./targets/$1/${PROJ}_management"
 
-  git clone $TARGET_REPO_DOCUMENTS
-  rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER_DOCUMENTS $TARGET_REPO_DOCUMENTS/$TARGET_FOLDER
-  cd $TARGET_REPO_DOCUMENTS
-  git add -A
-  git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
-  git push
-  git tag $VERSION
-  git push --tags
-  cd -
-
-  git clone $TARGET_REPO_USERS
-  rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER_USERS $TARGET_REPO_USERS/$TARGET_FOLDER
-  cd $TARGET_REPO_USERS
-  git add -A
-  git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
-  git push
-  git tag $VERSION
-  git push --tags
-  cd -
+    echo Preparing to sync into $TARGET_REPO
+    git clone $TARGET_REPO
+    rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER $TARGET_REPO
+    cd $TARGET_REPO
+    git add -A
+    git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
+    git push
+    git tag $VERSION
+    git push --tags
+    cd -
+    echo Sync into $TARGET_REPO completed
+  done
 }
 
 # --------------------------
@@ -55,7 +48,8 @@ if [ -d "./targets" ]; then rm -Rf ./targets; fi
 mkdir ./targets
 
 
-TARGETS=("java" "javascript")
+#TARGETS=("java" "javascript")
+TARGETS=("javascript")
 
 for (( i = 0; i < ${#TARGETS[@]} ; i++ )); do
     target=${TARGETS[$i]}
