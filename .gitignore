@@ -1,2 +1,6 @@
-targets/
+targets/java
+targets/javascript/document_management/node_modules
+targets/javascript/document_management/dist
+targets/javascript/user_management/node_modules
+targets/javascript/user_management/dist
 openapi-generator-cli.jar
