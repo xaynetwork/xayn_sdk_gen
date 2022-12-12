@@ -1,0 +1,33 @@
+name: Run tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup shell
+        uses: actions/setup-shell@v2
+        with:
+          shell: bash
+
+      - name: Set environment variables
+        env:
+          JS_WKDIR_DOCUMENTS: ./targets/javascript/document_management
+          JS_WKDIR_USERS: ./targets/javascript/user_management
+          ENDPOINT_DOCUMENTS: ${{ secrets.ENDPOINT }}
+          ENDPOINT_USERS: ${{ secrets.ENDPOINT }}
+          TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+          TOKEN_USERS: ${{ secrets.TOKEN_DOCUMENTS }}
+
+      - name: Run tests
+        run: |
+          cd scripts/javascript/document_management/test.sh
+          sh test.sh
+          cd -
+          cd scripts/javascript/user_management/test.sh
+          sh test.sh
