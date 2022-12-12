@@ -21,7 +21,6 @@ jobs:
           TOKEN_USERS: ${{ secrets.TOKEN_DOCUMENTS }}
 
       - name: Run tests
-        working-directory: ./scripts/javascript
         run: |
-          sh /document_management/test.sh
-          sh /user_management/test.sh
+          sh ./scripts/javascript/document_management/test.sh
+          sh ./scripts/javascript/user_management/test.sh
