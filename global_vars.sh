@@ -1,5 +1,4 @@
 LICENSE_NAME="Apache-2.0"
-VERSION="0.0.1"
 PROJNAME_DOCUMENTS="xayn_document_management_sdk"
 PROJNAME_USERS="xayn_user_management_sdk"
 PKG_DOCUMENTS="com.xayn.documents"
