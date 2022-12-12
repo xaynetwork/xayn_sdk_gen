@@ -14,3 +14,6 @@ jobs:
       run: bash ./generate.sh
       env:
         VERSION: ${{ github.ref }}
+        ENDPOINT: ${{ secrets.ENDPOINT }}
+        TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+        TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
