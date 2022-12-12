@@ -1,7 +1,9 @@
 name: Generate SDKs
 
 on:
-  workflow_dispatch:
+  push:
+    refs:
+      - refs/tags/*
 
 jobs:
   build:
@@ -10,12 +12,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run code generation
       run: |
-        echo The chosen version is $VERSION
+        echo Running code generation from tag: ${{ github.ref }}
         sh ./generate.sh
       env:
-        VERSION: ${{ inputs.VERSION }}
-
-inputs:
-  FIRST_PARAM:
-    description: Enter the (semantic) version number
-    required: true
+        VERSION: ${{ github.ref }}
