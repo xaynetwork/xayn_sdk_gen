@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run code generation
-      run: ./generate.sh
+      run: bash ./generate.sh
       env:
         VERSION: ${{ github.ref }}
