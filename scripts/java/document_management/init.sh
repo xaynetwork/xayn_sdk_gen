@@ -2,7 +2,7 @@
 set -e
 source scripts/java/common.sh
 
-cd $JAVA_WKDIR_DOCUMENTS || exit
+cd $WKDIR_DOCUMENTS || exit
 
 chmod +x gradlew
 ./gradlew
