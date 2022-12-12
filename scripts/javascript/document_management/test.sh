@@ -4,7 +4,7 @@ source scripts/javascript/common.sh
 
 cd $JS_WKDIR_DOCUMENTS || exit
 
-npm --endpoint=$ENDPOINT_DOCUMENTS --token=$TOKEN_DOCUMENTS run test
+npm --endpoint=${{ secrets.ENDPOINT }} --token=${{ secrets.TOKEN_DOCUMENTS }} run test
 
 if [ $? -eq 0 ]
 then

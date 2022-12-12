@@ -4,7 +4,7 @@ source scripts/javascript/common.sh
 
 cd $JS_WKDIR_USERS || exit
 
-npm --endpoint=$ENDPOINT_USERS --token=$TOKEN_USERS run test
+npm --endpoint=${{ secrets.ENDPOINT }} --token=${{ secrets.TOKEN_USERS }} run test
 
 if [ $? -eq 0 ]
 then
