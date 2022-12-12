@@ -13,11 +13,15 @@ function codegen() {
 }
 
 function push_to_designated_repo() {
-  TARGET_REPO_DOCUMENTS="https://github.com/xaynetwork/xayn_documents_sdk_$1.git"
-  TARGET_REPO_USERS="https://github.com/xaynetwork/xayn_users_sdk_$1.git"
+  TARGET_REPO_DOCUMENTS="git@github.com:xaynetwork/xayn_documents_sdk_$1.git"
+  TARGET_REPO_USERS="git@github.com:xaynetwork/xayn_users_sdk_$1.git"
   SOURCE_FOLDER_DOCUMENTS="./targets/$1/document_management"
   SOURCE_FOLDER_USERS="./targets/$1/user_management"
-  TARGET_FOLDER="./src"
+  TARGET_FOLDER="./"
+
+  # todo: some cleanup for every target that is more generic...
+  rm -rf $SOURCE_FOLDER_DOCUMENTS/node_modules/
+  rm -rf $SOURCE_FOLDER_USERS/node_modules/
 
   git clone $TARGET_REPO_DOCUMENTS
   rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER_DOCUMENTS $TARGET_REPO_DOCUMENTS/$TARGET_FOLDER
