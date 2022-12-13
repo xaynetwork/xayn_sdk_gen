@@ -1,0 +1,26 @@
+name: Verify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Verify Generation
+      run: bash ./test.sh
+      env:
+        VERSION: ${{ github.ref }}
+        ENDPOINT: ${{ secrets.ENDPOINT }}
+        TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+        TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
