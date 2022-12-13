@@ -43,7 +43,7 @@ function push_to_designated_repo() {
     rm -Rf ./targets/$1/$DIR/src
     rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
     cd $TARGET_NAME
-    git status
+    ls
     git add -A
     git commit -m "Sync from codegen: version [$VERSION]"
     git push
