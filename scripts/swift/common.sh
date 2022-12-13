@@ -8,6 +8,7 @@ TEMPLATE_DOCUMENTS="./.test/$LANG/document_management/test"
 TEMPLATE_USERS="./.test/$LANG/user_management/test"
 GEN_PROPS_DOCUMENTS=""
 GEN_PROPS_USERS=""
+PARAMS="--library=alamofire"
 
 create_git_repo() {
     git init
