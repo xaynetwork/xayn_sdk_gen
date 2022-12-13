@@ -5,6 +5,7 @@ source scripts/javascript/common.sh
 cd $JS_WKDIR_USERS || exit
 
 ## npm commands
-npm install
+npx license $LICENSE_NAME
+npx gitignore node
 
 cd - || exit

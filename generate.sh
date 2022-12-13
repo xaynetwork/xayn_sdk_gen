@@ -11,7 +11,6 @@ function codegen() {
     ./scripts/$1/$DIR/cleanup.sh
     ./scripts/$1/$DIR/init.sh
     ./scripts/$1/$DIR/test.sh
-    ./scripts/$1/$DIR/pre_sync.sh
   done
 }
 
@@ -20,20 +19,33 @@ function push_to_designated_repo() {
 
   for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
     PROJ=${PROJS[$i]}
-    TARGET_REPO="git@github.com:xaynetwork/xayn_${PROJ}s_sdk_$1.git"
-    SOURCE_FOLDER="./targets/$1/${PROJ}_management"
+    DIR=${PROJ}_management
+    TARGET_NAME="xayn_${PROJ}s_sdk_$1"
+    TARGET_REPO="https://github.com/xaynetwork/$TARGET_NAME.git"
+    SOURCE_FOLDER="./targets/$1/$DIR"
 
-    echo Preparing to sync into $TARGET_REPO
-    git clone --branch main $TARGET_REPO
-    rsync -avz --delete $SOURCE_REPO/$SOURCE_FOLDER $TARGET_REPO
-    cd $TARGET_REPO
+    # delete target folder if needed
+    if [ -d "./$TARGET_NAME" ]; then rm -Rf ./$TARGET_NAME; fi
+
+    # purge project folder
+    rm -Rf ./targets/$1/${PROJ}_management
+
+    # clean regen for commit
+    ./scripts/$1/$DIR/generate.sh
+    ./scripts/$1/$DIR/cleanup.sh
+    ./scripts/$1/$DIR/license.sh
+
+    echo Preparing to sync into $TARGET_NAME
+    git clone $TARGET_REPO
+    rsync -avz --delete $SOURCE_FOLDER/ $TARGET_NAME
+    cd $TARGET_NAME
     git add -A
     git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
-    git push main
+    git push
     git tag $VERSION
     git push --tags
     cd -
-    echo Sync into $TARGET_REPO completed
+    echo Sync into $TARGET_NAME completed
   done
 }
 

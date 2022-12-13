@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        repo-token: ${{ secrets.GH_TOKEN }}
     - name: Run code generation
       run: bash ./generate.sh
       env:
