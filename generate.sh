@@ -44,7 +44,7 @@ function push_to_designated_repo() {
     rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
     cd $TARGET_NAME
     git add -A
-    git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
+    git commit -m "Sync from codegen: version [$VERSION]"
     git push
     git tag $VERSION
     git push --tags
