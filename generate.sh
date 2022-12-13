@@ -22,6 +22,11 @@ function codegen() {
 if [ -d "./targets" ]; then rm -Rf ./targets; fi
 mkdir ./targets
 
+# pull in the latest openapi spec files
+ENGINE_REPO="git@github.com:xaynetwork/xayn_discovery_engine.git"
+git clone $ENGINE_REPO
+cp $ENGINE_REPO/web-api/openapi/document_management.yaml ./
+cp $ENGINE_REPO/web-api/openapi/user_management.yaml ./
 
 TARGETS=("java" "javascript")
 
