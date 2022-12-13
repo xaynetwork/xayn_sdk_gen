@@ -39,8 +39,11 @@ function push_to_designated_repo() {
 
     echo Preparing to sync into $TARGET_NAME
     git clone $TARGET_REPO
-    # delete old src in repo
-    rm -Rf ./targets/$1/$DIR/src
+    
+    # delete old docs/src in repo
+    rm -Rf $TARGET_NAME/docs
+    rm -Rf $TARGET_NAME/src
+
     rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
     cd $TARGET_NAME
     ls
