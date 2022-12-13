@@ -39,7 +39,7 @@ function push_to_designated_repo() {
 
     echo Preparing to sync into $TARGET_NAME
     git clone $TARGET_REPO
-    rsync -avz --delete $SOURCE_FOLDER/ $TARGET_NAME
+    rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
     cd $TARGET_NAME
     git add -A
     git commit -m "Sync from $SOURCE_REPO, version: $VERSION"
