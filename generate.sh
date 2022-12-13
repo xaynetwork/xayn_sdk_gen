@@ -33,6 +33,8 @@ function push_to_designated_repo() {
     # clean regen for commit
     ./scripts/$1/$DIR/generate.sh
     ./scripts/$1/$DIR/cleanup.sh
+
+    sudo chmod +x ./scripts/$1/$DIR/license.sh
     ./scripts/$1/$DIR/license.sh
 
     echo Preparing to sync into $TARGET_NAME
