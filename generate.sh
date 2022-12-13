@@ -20,7 +20,7 @@ function push_to_designated_repo() {
 
   for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
     PROJ=${PROJS[$i]}
-    TARGET_REPO="https://github.com/xaynetwork/xayn_${PROJ}s_sdk_$1.git"
+    TARGET_REPO="git@github.com:xaynetwork/xayn_${PROJ}s_sdk_$1.git"
     SOURCE_FOLDER="./targets/$1/${PROJ}_management"
 
     echo Preparing to sync into $TARGET_REPO
