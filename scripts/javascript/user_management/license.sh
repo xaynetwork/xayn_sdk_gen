@@ -2,9 +2,10 @@
 set -e
 source scripts/javascript/common.sh
 
-cd $WKDIR_DOCUMENTS || exit
+cd $JS_WKDIR_USERS || exit
 
 ## npm commands
-npm install
+npx license $LICENSE_NAME
+npx gitignore node
 
 cd - || exit
