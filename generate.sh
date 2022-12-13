@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# Set this to debug the execution of shell commands
+# set -o xtrace
+
 function codegen() {
   DIRS=("document_management" "user_management")
 
@@ -67,7 +70,6 @@ function push_to_designated_repo() {
 # reset targets directory
 if [ -d "./targets" ]; then rm -Rf ./targets; fi
 mkdir ./targets
-
 
 TARGETS=("java" "javascript")
 
