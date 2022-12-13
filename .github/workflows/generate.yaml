@@ -19,6 +19,12 @@ jobs:
           Host github.com
             IdentityFile ~/.ssh/id_rsa_github
         if_key_exists: replace
+
+    - name: Configure Git
+        shell: bash
+        run: |
+          git config --global user.email "ci@xayn.com"
+          git config --global user.name "ci"    
         
     - uses: actions/checkout@v2
     - name: Run code generation
