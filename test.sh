@@ -12,5 +12,6 @@ for (( i = 0; i < ${#TARGETS[@]} ; i++ )); do
     printf "\n**** Running: ${target} *****\n\n"
 
     codegen $target
-    push_to_designated_repo $target
 done
+
+rm -rf target

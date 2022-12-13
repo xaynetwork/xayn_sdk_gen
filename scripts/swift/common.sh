@@ -11,6 +11,8 @@ GEN_PROPS_USERS=""
 
 create_git_repo() {
     git init
+    git config user.email "test@example.com"
+    git config user.name "Test Committer"
     git add -A
     git commit -m "initial commit"
     git tag 1.0.0
