@@ -13,9 +13,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  verify:
+    runs-on: ubuntu-20.04
     steps:
+    - name: Install Swift
+      uses: slashmo/install-swift@v0.2.1
+      with:
+        version: 5.7.1
     - uses: actions/checkout@v2
     - name: Verify Generation
       run: bash ./test.sh
