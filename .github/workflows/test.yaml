@@ -1,6 +1,7 @@
 name: Verify
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -16,10 +17,10 @@ jobs:
   verify:
     runs-on: ubuntu-20.04
     steps:
-    - name: Install Swift
-      uses: slashmo/install-swift@v0.2.1
-      with:
-        version: 5.6.1
+    # - name: Install Swift
+    #   uses: slashmo/install-swift@v0.2.1
+    #   with:
+    #     version: 5.6.1
     - uses: actions/checkout@v2
     - name: Verify Generation
       run: bash ./test.sh
