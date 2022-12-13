@@ -20,6 +20,7 @@ jobs:
             IdentityFile ~/.ssh/id_rsa_github
         if_key_exists: replace
         
+    - uses: actions/checkout@v2
     - name: Run code generation
       run: bash ./generate.sh
       env:
