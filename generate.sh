@@ -21,14 +21,14 @@ function push_to_designated_repo() {
     PROJ=${PROJS[$i]}
     DIR=${PROJ}_management
     TARGET_NAME="xayn_${PROJ}s_sdk_$1"
-    TARGET_REPO="https://github.com/xaynetwork/$TARGET_NAME.git"
+    TARGET_REPO="git@github.com:xaynetwork/$TARGET_NAME.git"
     SOURCE_FOLDER="./targets/$1/$DIR"
 
     # delete target folder if needed
     if [ -d "./$TARGET_NAME" ]; then rm -Rf ./$TARGET_NAME; fi
 
     # purge project folder
-    rm -Rf ./targets/$1/${PROJ}_management
+    rm -Rf ./targets/$1/$DIR
 
     # clean regen for commit
     ./scripts/$1/$DIR/generate.sh
@@ -39,6 +39,8 @@ function push_to_designated_repo() {
 
     echo Preparing to sync into $TARGET_NAME
     git clone $TARGET_REPO
+    # delete old src in repo
+    rm -Rf ./targets/$1/$DIR/src
     rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
     cd $TARGET_NAME
     git add -A
