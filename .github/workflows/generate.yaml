@@ -9,22 +9,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
+    - name: Check out code and run code generation
+      uses: actions/checkout@v2
       with:
-        key: ${{ secrets.SSH }}
-        name: id_rsa_github
+        ssh-key: ${{ secrets.SSH }}
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
         config: |
           Host github.com
             IdentityFile ~/.ssh/id_rsa_github
         if_key_exists: replace
-        
-    - uses: actions/checkout@v2
-    - name: Run code generation
-      run: bash ./generate.sh
       env:
         VERSION: ${{ github.ref }}
         ENDPOINT: ${{ secrets.ENDPOINT }}
         TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
         TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
+      run: bash ./generate.sh
