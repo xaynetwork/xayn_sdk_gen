@@ -16,6 +16,7 @@ function codegen() {
 
 function push_to_designated_repo() {
   PROJS=("document" "user")
+  VERSION=v$($VERSION | cut -d '/' -f 3)
 
   for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
     PROJ=${PROJS[$i]}
@@ -39,7 +40,7 @@ function push_to_designated_repo() {
 
     echo Preparing to sync into $TARGET_NAME
     git clone $TARGET_REPO
-    
+
     # delete old docs/src in repo
     rm -Rf $TARGET_NAME/docs
     rm -Rf $TARGET_NAME/src
