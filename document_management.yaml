@@ -67,7 +67,7 @@ paths:
           description: successful operation
         '400':
           description: invalid request
-   
+
   /documents/{document_id}:
     delete:
       tags:
@@ -83,7 +83,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '204':
           description: successful operation
@@ -103,7 +103,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '200':
           description: successful operation
@@ -127,7 +127,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
       requestBody:
         content:
           application/json:
@@ -152,7 +152,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '204':
           description: successful operation
@@ -174,7 +174,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
         - name: property_id
           in: path
           description: Id of the document property
@@ -204,7 +204,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
         - name: property_id
           in: path
           description: Id of the document property
@@ -235,7 +235,7 @@ paths:
           description: Id of the document
           required: true
           schema:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
         - name: property_id
           in: path
           description: Id of the document property
@@ -257,54 +257,36 @@ components:
       in: header
       name: authorizationToken
   schemas:
-    DocumentId:
-      description: |-
-        A document id can be any non-empty UTF-8 string that does not contain the null byte.
-        It may consist of digits, Latin letters, underscores, colons, minus signs, at signs, and dots.
-      type: string
-      example: "document_id"
     DocumentPropertyId:
       description: |-
         A document property id can be any non-empty UTF-8 string that does not contain the null byte.
         It may consist of digits, Latin letters, underscores, colons, minus signs, at signs, and dots.
       type: string
       example: "document_property_id"
-    DocumentProperty:
-      description: Arbitrary property that can be attached to a document.
-      example: "News title"
     DocumentPropertyRequest:
       type: object
       required: [property]
       properties:
         property:
-          $ref: '#/components/schemas/DocumentProperty'
+          $ref: './schemas/document.yml#/DocumentProperty'
     DocumentPropertyResponse:
       type: object
       required: [property]
       properties:
         property:
-          $ref: '#/components/schemas/DocumentProperty'
-    DocumentProperties:
-      description: Arbitrary properties that can be attached to a document. A key must be a valid `DocumentPropertyId`.
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/DocumentProperty'
-      example:
-        title: "News title"
-        image_url: "http://example.com/news_image.jpg"
-        link: "http://example.com/this_news"
+          $ref: './schemas/document.yml#/DocumentProperty'
     DocumentPropertiesRequest:
       type: object
       required: [properties]
       properties:
         properties:
-          $ref: '#/components/schemas/DocumentProperties'
+          $ref: './schemas/document.yml#/DocumentProperties'
     DocumentPropertiesResponse:
       type: object
       required: [properties]
       properties:
         properties:
-          $ref: '#/components/schemas/DocumentProperties'
+          $ref: './schemas/document.yml#/DocumentProperties'
     BaseError:
       type: object
       required: [request_id, kind]
@@ -323,12 +305,12 @@ components:
       required: [id, snippet]
       properties:
         id:
-          $ref: '#/components/schemas/DocumentId'
+          $ref: './schemas/document.yml#/DocumentId'
         snippet:
           description: Text that will be used to match the document against the user interests.
           type: string
         properties:
-          $ref: '#/components/schemas/DocumentProperties'
+          $ref: './schemas/document.yml#/DocumentProperties'
     IngestionRequest:
       type: object
       required: [documents]
@@ -354,7 +336,7 @@ components:
                     required: [id]
                     properties:
                       id:
-                        $ref: '#/components/schemas/DocumentId'
+                        $ref: './schemas/document.yml#/DocumentId'
     DeleteDocumentsRequest:
       type: object
       required: [documents]
@@ -362,4 +344,4 @@ components:
         documents:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentId'
+            $ref: './schemas/document.yml#/DocumentId'
