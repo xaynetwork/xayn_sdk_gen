@@ -1,5 +1,3 @@
-TARGETS=("swift" "javascript")
-
 function codegen() {
   DIRS=("document_management" "user_management")
 
@@ -34,8 +32,11 @@ function push_to_designated_repo() {
     ./scripts/$1/$DIR/generate.sh
     ./scripts/$1/$DIR/cleanup.sh
 
-    sudo chmod +x ./scripts/$1/$DIR/license.sh
-    ./scripts/$1/$DIR/license.sh
+    if  [ -f ./scripts/$1/$DIR/license.sh ]; then
+      ./scripts/$1/$DIR/license.sh
+    else
+       cp ./scripts/LICENSE $SOURCE_FOLDER
+    fi
 
     echo Preparing to sync into $TARGET_NAME
     git clone $TARGET_REPO

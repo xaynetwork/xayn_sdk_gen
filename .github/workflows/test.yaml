@@ -19,9 +19,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Verify Generation
+      timeout-minutes: 10
       run: |
         ./test.sh swift
-
       env:
         VERSION: ${{ github.ref }}
         ENDPOINT: ${{ secrets.ENDPOINT }}
@@ -33,6 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Verify Generation
+      timeout-minutes: 10
       run: |
         ./test.sh javascript
         ./test.sh java
