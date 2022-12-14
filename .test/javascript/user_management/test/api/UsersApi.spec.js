@@ -1,6 +1,6 @@
 /**
- * Personalization API For Document Management
- * # Documents management For this system, a document is anything that has an id, a snippet, and an arbitrary set of properties. The id uniquely identifies the document in the system. The system uses the snippet to create a document representation that can be matched against user interests.  It is possible to attach any properties to a document; the system will not use them but will be returned together with the document when asking for personalized documents for a user. They could help store information like a title and the URL where it is possible to find the document. Each document can have its own set of properties.  The API offers an endpoint that allows uploading the documents to the system. After a successful upload, it will be possible to use the document in other endpoints.  # Auth To authenticate with the API, a token will be provided.
+ * Personalization API For User Management
+ * # User management The system identifies a user with only an id. There are two main endpoints: one that allows registering an interaction between a user and a document (a user clicked or liked a document), and one to retrieve a personalized set of documents for the user. The system needs a few user interactions with documents before it can generate a personalized list.  # Auth To authenticate with the API, a token will be provided.
  *
  * The version of the OpenAPI document: 1.0.0-rc5
  *
@@ -66,6 +66,10 @@
         api
           .getPersonalizedDocuments("xayn_test_user", {
             count: 10,
+          })
+          .then((result) => {
+            expect(result.documents.length).to.be(0);
+            done();
           })
           .catch((error) => {
             expect(error.body.kind).to.be("NotEnoughInteractions");

@@ -69,8 +69,7 @@ if [ -d "./targets" ]; then rm -Rf ./targets; fi
 mkdir ./targets
 
 
-#TARGETS=("java" "javascript")
-TARGETS=("javascript")
+TARGETS=("java" "javascript")
 
 for (( i = 0; i < ${#TARGETS[@]} ; i++ )); do
     target=${TARGETS[$i]}
