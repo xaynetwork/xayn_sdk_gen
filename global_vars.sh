@@ -5,4 +5,3 @@ PKG_DOCUMENTS="com.xayn.documents"
 PKG_USERS="com.xayn.users"
 ID_DOCUMENTS="xayn_documents_sdk"
 ID_USERS="xayn_users_sdk"
-TARGETS=("swift" "java" "javascript")

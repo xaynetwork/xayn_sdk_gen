@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  build-others:
     runs-on: ubuntu-latest
     steps:
     - name: Install SSH key
@@ -28,7 +28,38 @@ jobs:
         
     - uses: actions/checkout@v2
     - name: Run code generation
-      run: bash ./generate.sh
+      run: |
+        ./generate.sh javascript
+        ./generate.sh java
+      env:
+        VERSION: ${{ github.ref }}
+        ENDPOINT: ${{ secrets.ENDPOINT }}
+        TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+        TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
+  build-swift:
+    runs-on: macos-latest
+    steps:
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH }}
+        name: id_rsa_github
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        config: |
+          Host github.com
+            IdentityFile ~/.ssh/id_rsa_github
+        if_key_exists: replace
+
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config --global user.email "ci@xayn.com"
+        git config --global user.name "ci"
+        
+    - uses: actions/checkout@v2
+    - name: Run code generation
+      run: |
+        ./generate.sh swift
       env:
         VERSION: ${{ github.ref }}
         ENDPOINT: ${{ secrets.ENDPOINT }}
