@@ -23,7 +23,7 @@ class UserTest: XCTestCase {
     override func setUp() {
         super.setUp()
         assert(endpoint != nil, "Missing ENDPOINT in env")
-        assert(token != nil, "Missing AUTH_TOKEN in env")
+        assert(token != nil, "Missing TOKEN_USERS in env")
         
         OpenAPIClientAPI.basePath = endpoint!
         OpenAPIClientAPI.customHeaders["authorizationToken"] = token!
