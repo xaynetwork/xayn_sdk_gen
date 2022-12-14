@@ -14,16 +14,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    runs-on: ubuntu-20.04
+  verify-swift:
+    runs-on: macos-latest
     steps:
-    # - name: Install Swift
-    #   uses: slashmo/install-swift@v0.2.1
-    #   with:
-    #     version: 5.6.1
     - uses: actions/checkout@v2
     - name: Verify Generation
-      run: bash ./test.sh
+      run: |
+        ./test.sh swift
+
+      env:
+        VERSION: ${{ github.ref }}
+        ENDPOINT: ${{ secrets.ENDPOINT }}
+        TOKEN_DOCUMENTS: ${{ secrets.TOKEN_DOCUMENTS }}
+        TOKEN_USERS: ${{ secrets.TOKEN_USERS }}
+
+  verify-others:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Verify Generation
+      run: |
+        ./test.sh javascript
+        ./test.sh java
       env:
         VERSION: ${{ github.ref }}
         ENDPOINT: ${{ secrets.ENDPOINT }}

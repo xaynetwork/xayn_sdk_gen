@@ -13,7 +13,7 @@ enum TestError: Error {
 class UserTest: XCTestCase {
     let testTimeout = 4.0
     let endpoint : String? = ProcessInfo.processInfo.environment["ENDPOINT"]
-    let token  : String? = ProcessInfo.processInfo.environment["AUTH_TOKEN_USERS"]
+    let token  : String? = ProcessInfo.processInfo.environment["TOKEN_USERS"]
     
     
     struct DateTest: Codable {
