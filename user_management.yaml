@@ -100,24 +100,6 @@ components:
       in: header
       name: authorizationToken
   schemas:
-    DocumentId:
-      description: |-
-        A document id can be any non-empty UTF-8 string that does not contain the null byte.
-        It may consist of digits, Latin letters, underscores, colons, minus signs, at signs, and dots.
-      type: string
-      example: "document_id"
-    DocumentProperty:
-      description: Arbitrary property that can be attached to a document.
-      example: "News title"
-    DocumentProperties:
-      description: Arbitrary properties that can be attached to a document. A key must be a valid `DocumentPropertyId`.
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/DocumentProperty'
-      example:
-        title: "News title"
-        image_url: "http://example.com/news_image.jpg"
-        link: "http://example.com/this_news"
     UserId:
       description: |-
         A user id can be any non-empty UTF-8 string that does not contain the null byte.
@@ -142,11 +124,11 @@ components:
       required: [id, score]
       properties:
         id:
-          $ref: '#/components/schemas/DocumentId'
+          $ref: './schemas/document.yml#/DocumentId'
         score:
           type: number
         properties:
-          $ref: '#/components/schemas/DocumentProperties'
+          $ref: './schemas/document.yml#/DocumentProperties'
     PersonalizedDocumentsResponse:
       type: object
       required: [documents]
@@ -171,7 +153,7 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/DocumentId'
+          $ref: './schemas/document.yml#/DocumentId'
         type:
           $ref: '#/components/schemas/UserInteractionType'
     UserInteractionRequest:
