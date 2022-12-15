@@ -24,14 +24,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * API tests for DocumentsApi
@@ -56,7 +52,7 @@ public class DocumentsApiTest {
      * @throws ApiException if the Api call fails
      */
     @BeforeEach
-    public void ingestDocumentsTest() throws ApiException, IOException {
+    public void ingestDocumentsTest() throws ApiException {
         List<IngestedDocument> documents = new ArrayList<IngestedDocument>();
         Map<String, Object> properties = new HashMap<String, Object>();
 
