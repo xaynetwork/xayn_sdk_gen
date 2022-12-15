@@ -2,8 +2,8 @@
 set -e
 source scripts/java/common.sh
 
-cd $WKDIR_USERS || exit
+cd $WKDIR_USERS
 
 ./gradlew test -Dendpoint=$ENDPOINT -Dtoken=$TOKEN_USERS --info
 
-cd - || exit
+cd -
