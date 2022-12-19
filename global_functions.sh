@@ -16,7 +16,7 @@ function codegen() {
 
 function push_to_designated_repo() {
   PROJS=("document" "user")
-  VERSION=v$(echo "$VERSION" | cut -d '/' -f 3)
+  VERSION=$(echo "$VERSION" | cut -d '/' -f 3)
 
   for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
     PROJ=${PROJS[$i]}
