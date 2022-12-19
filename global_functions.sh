@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+source global_vars.sh
+
 function codegen() {
   DIRS=("document_management" "user_management")
 
