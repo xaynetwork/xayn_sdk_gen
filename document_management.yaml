@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Personalization API For Document Management
-  version: 1.0.0-rc5
+  title: Back Office API
+  version: 1.0.0
   description: |-
-    # Documents management
+    # Back Office
     For this system, a document is anything that has an id, a snippet, and an arbitrary set of properties.
     The id uniquely identifies the document in the system.
     The system uses the snippet to create a document representation that can be matched against user interests.
@@ -16,17 +16,17 @@ info:
     To authenticate with the API, a token will be provided.
 
 tags:
-  - name: documents
+  - name: back office
     description: Management of the documents in the system.
 
 security:
-  - ApiKeyAuth: []    
+  - ApiKeyAuth: []
 
 paths:
   /documents:
     post:
       tags:
-        - documents
+        - back office
       summary: Add documents to the system
       description: |-
         Add documents to the system. The system will create a representation of the document
@@ -50,7 +50,7 @@ paths:
                 $ref: '#/components/schemas/IngestionError'
     delete:
       tags:
-        - documents
+        - back office
       summary: Delete all listed documents.
       description: |-
         Delete all documents listed in the request body. The endpoint is
@@ -69,21 +69,16 @@ paths:
           description: invalid request
 
   /documents/{document_id}:
+    parameters:
+      - $ref: './parameters/path/document_id.yml'
     delete:
       tags:
-        - documents
+        - back office
       summary: Delete the document from the system.
       description: |-
         Permanently deletes the document from the system. The endpoint is
         idempotent. Deleting a non-existing document does not produce an error.
       operationId: deleteDocument
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '204':
           description: successful operation
@@ -91,19 +86,14 @@ paths:
           description: invalid request
 
   /documents/{document_id}/properties:
+    parameters:
+      - $ref: './parameters/path/document_id.yml'
     get:
       tags:
-        - documents
+        - back office
       summary: Get all document properties
       description: Gets all the properties of the document.
       operationId: getDocumentProperties
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '200':
           description: successful operation
@@ -117,17 +107,10 @@ paths:
           description: document id not found
     put:
       tags:
-        - documents
+        - back office
       summary: Set all document properties
       description: Sets or replaces all the properties of the document.
       operationId: setDocumentProperties
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
       requestBody:
         content:
           application/json:
@@ -142,17 +125,10 @@ paths:
           description: document id not found
     delete:
       tags:
-        - documents
+        - back office
       summary: Delete all document properties
       description: Deletes all the properties of the document.
       operationId: deleteDocumentProperties
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
       responses:
         '204':
           description: successful operation
@@ -162,25 +138,20 @@ paths:
           description: document id not found
 
   /documents/{document_id}/properties/{property_id}:
+    parameters:
+      - $ref: './parameters/path/document_id.yml'
+      - name: property_id
+        in: path
+        description: Id of the document property
+        required: true
+        schema:
+          $ref: './schemas/document.yml#/DocumentPropertyId'
     get:
       tags:
-        - documents
+        - back office
       summary: Get a document property
       description: Gets the property of the document.
       operationId: getDocumentProperty
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
-        - name: property_id
-          in: path
-          description: Id of the document property
-          required: true
-          schema:
-            $ref: '#/components/schemas/DocumentPropertyId'
       responses:
         '200':
           description: successful operation
@@ -194,23 +165,10 @@ paths:
           description: document id or property id not found
     put:
       tags:
-        - documents
+        - back office
       summary: Set a document property
       description: Sets or replaces the property of the document.
       operationId: setDocumentProperty
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
-        - name: property_id
-          in: path
-          description: Id of the document property
-          required: true
-          schema:
-            $ref: '#/components/schemas/DocumentPropertyId'
       requestBody:
         content:
           application/json:
@@ -225,23 +183,10 @@ paths:
           description: document id not found
     delete:
       tags:
-        - documents
+        - back office
       summary: Delete a document property
       description: Deletes the property of the document.
       operationId: deleteDocumentProperty
-      parameters:
-        - name: document_id
-          in: path
-          description: Id of the document
-          required: true
-          schema:
-            $ref: './schemas/document.yml#/DocumentId'
-        - name: property_id
-          in: path
-          description: Id of the document property
-          required: true
-          schema:
-            $ref: '#/components/schemas/DocumentPropertyId'
       responses:
         '204':
           description: successful operation
@@ -253,16 +198,8 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: authorizationToken
+      $ref: './securitySchemes/auth.yml#/ApiKeyAuth'
   schemas:
-    DocumentPropertyId:
-      description: |-
-        A document property id can be any non-empty UTF-8 string that does not contain the null byte.
-        It may consist of digits, Latin letters, underscores, colons, minus signs, at signs, and dots.
-      type: string
-      example: "document_property_id"
     DocumentPropertyRequest:
       type: object
       required: [property]
@@ -287,19 +224,6 @@ components:
       properties:
         properties:
           $ref: './schemas/document.yml#/DocumentProperties'
-    BaseError:
-      type: object
-      required: [request_id, kind]
-      properties:
-        request_id:
-          description: Request ID optionally generated from the service. It can be communicated to xayn to help debugging.
-          type: string
-        kind:
-          description: What kind of error this is.
-          type: string
-        details:
-          description: Additional error details. Might differ depending on debug options.
-          type: object
     IngestedDocument:
       type: object
       required: [id, snippet]
@@ -321,7 +245,7 @@ components:
             $ref: '#/components/schemas/IngestedDocument'
     IngestionError:
       allOf:
-        - $ref: '#/components/schemas/BaseError'
+        - $ref: './schemas/error.yml#/BaseError'
         - type: object
           required: [details]
           properties:

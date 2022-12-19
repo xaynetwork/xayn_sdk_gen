@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 function codegen() {
   DIRS=("document_management" "user_management")
 
@@ -18,7 +21,7 @@ function push_to_designated_repo() {
   for (( i = 0; i < ${#PROJS[@]} ; i++ )); do
     PROJ=${PROJS[$i]}
     DIR=${PROJ}_management
-    TARGET_NAME="xayn_${PROJ}_management_sdk_$1"
+    TARGET_NAME="$PROJNAME_DOCUMENTS_$1"
     TARGET_REPO="git@github.com:xaynetwork/$TARGET_NAME.git"
     SOURCE_FOLDER="./targets/$1/$DIR"
 

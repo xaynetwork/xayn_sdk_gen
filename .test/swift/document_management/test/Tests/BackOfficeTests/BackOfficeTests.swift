@@ -10,7 +10,7 @@ enum TestError: Error {
     case runtimeError(String)
 }
 
-class UserTest: XCTestCase {
+class BackOfficeTests: XCTestCase {
     let testTimeout = 4.0
     let endpoint : String? = ProcessInfo.processInfo.environment["ENDPOINT"]
     let token  : String? = ProcessInfo.processInfo.environment["TOKEN_DOCUMENTS"]
@@ -43,7 +43,7 @@ class UserTest: XCTestCase {
             IngestedDocument(id: "test_D", snippet: "Documents the lives of infamous fakers Elmyr de Hory and Clifford Irving. De Hory, who later committed suicide to avoid more prison time, made his name by selling forged works of art by painters like Picasso and Matisse. Irving was infamous for writing a fake autobiography of Howard Hughes. Welles moves between documentary and fiction as he examines the fundamental elements of fraud and the people who commit fraud at the expense of others.", properties: [  "category": "test"])
         ])
         
-        DocumentsAPI.ingestDocuments(ingestionRequest: request){ response, error in
+        BackOfficeAPI.ingestDocuments(ingestionRequest: request){ response, error in
             guard error == nil else {
                 printError(error)
                 
@@ -60,7 +60,7 @@ class UserTest: XCTestCase {
     func testB_DocumentDeletion() {
         let expectation = self.expectation(description: "Test: Should call deleteDocument successfully")
         
-        DocumentsAPI.deleteDocument(documentId: "test_D" ) { response, error in
+        BackOfficeAPI.deleteDocument(documentId: "test_D" ) { response, error in
             guard error == nil else {
                 printError(error)
                 
@@ -76,7 +76,7 @@ class UserTest: XCTestCase {
     func testC_DocumentPropertiesDeletion() {
         let expectation = self.expectation(description: "Test: Should call deleteDocumentProperties successfully")
         
-        DocumentsAPI.deleteDocumentProperties(documentId: "test_A" ) { response, error in
+        BackOfficeAPI.deleteDocumentProperties(documentId: "test_A" ) { response, error in
             guard error == nil else {
                 printError(error)
                 
@@ -92,7 +92,7 @@ class UserTest: XCTestCase {
     func testD_DocumentPropertyDeletion() {
         let expectation = self.expectation(description: "Test: Should call delete DocuementProperty successfully")
         
-        DocumentsAPI.deleteDocumentProperty(documentId: "test_A", propertyId: "category") { response, error in
+        BackOfficeAPI.deleteDocumentProperty(documentId: "test_A", propertyId: "category") { response, error in
             guard error == nil else {
                 printError(error)
                 
@@ -110,7 +110,7 @@ class UserTest: XCTestCase {
         let expectation = self.expectation(description: "Test: Should call deleteDocuments successfully")
         let request = DeleteDocumentsRequest(documents: ["test_A", "test_B"])
         
-        DocumentsAPI.deleteDocuments(deleteDocumentsRequest: request) { response, error in
+        BackOfficeAPI.deleteDocuments(deleteDocumentsRequest: request) { response, error in
             guard error == nil else {
                 printError(error)
                 

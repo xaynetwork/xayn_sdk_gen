@@ -20,24 +20,24 @@
     factory(require("expect.js"), require(process.cwd() + "/src/index"));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.XaynUserManagementSdk);
+    factory(root.expect, root.XaynFrontOfficeSdk);
   }
-})(this, function (expect, XaynUserManagementSdk) {
+})(this, function (expect, XaynFrontOfficeSdk) {
   "use strict";
 
   var api;
 
   beforeEach(function () {
-    let client = new XaynUserManagementSdk.ApiClient(
+    let client = new XaynFrontOfficeSdk.ApiClient(
       process.env.npm_config_endpoint
     );
     let api_key = client.authentications["ApiKeyAuth"];
     api_key.apiKey = process.env.npm_config_token;
 
-    api = new XaynUserManagementSdk.UsersApi(client);
+    api = new XaynFrontOfficeSdk.FrontOfficeApi(client);
   });
 
-  describe("UsersApi", function () {
+  describe("FrontOfficeApi", function () {
     describe("documentInteraction", function () {
       it("should call documentInteraction successfully", function (done) {
         api

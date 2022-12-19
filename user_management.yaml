@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Personalization API For User Management
-  version: 1.0.0-rc5
+  title: Front Office API
+  version: 1.0.0
   description: |-
-    # User management
+    # Front Office
     The system identifies a user with only an id.
     There are two main endpoints: one that allows registering an interaction between a user and a document (a user clicked or liked a document), and one to retrieve a personalized set of documents for the user. The system needs a few user interactions with documents before it can generate a personalized list.
 
@@ -11,7 +11,7 @@ info:
     To authenticate with the API, a token will be provided.
 
 tags:
-  - name: users
+  - name: front office
     description: Interaction of the user and personalized document.
 
 security:
@@ -21,7 +21,7 @@ paths:
   /users/{user_id}/personalized_documents:
     get:
       tags:
-        - users
+        - front office
       summary: Get personalized documents for the user
       description: |-
         Returns a list of documents personalized for the given `user_id`.
@@ -29,12 +29,7 @@ paths:
         The score is a value between 0 and 1 where a higher value means that the document matches the preferences of the user better.
       operationId: getPersonalizedDocuments
       parameters:
-        - name: user_id
-          in: path
-          description: Id of the user
-          required: true
-          schema:
-            $ref: '#/components/schemas/UserId'
+        - $ref: './parameters/path/user_id.yml'
         - name: count
           in: query
           description: Maximum number of personalized documents to return
@@ -66,18 +61,13 @@ paths:
   /users/{user_id}/interactions:
     patch:
       tags:
-        - users
+        - front office
       summary: Add interaction between a user and a document
       description: |-
         The interaction is used to provide personalized documents to the user.
       operationId: documentInteraction
       parameters:
-        - name: user_id
-          in: path
-          description: Id of the user
-          required: true
-          schema:
-            $ref: '#/components/schemas/UserId'
+        - $ref: './parameters/path/user_id.yml'
       requestBody:
         content:
           application/json:
@@ -96,29 +86,8 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: authorizationToken
+      $ref: './securitySchemes/auth.yml#/ApiKeyAuth'
   schemas:
-    UserId:
-      description: |-
-        A user id can be any non-empty UTF-8 string that does not contain the null byte.
-        It may consist of digits, Latin letters, underscores, colons, minus signs, at signs, and dots.
-      type: string
-      example: "user_id"
-    BaseError:
-      type: object
-      required: [request_id, kind]
-      properties:
-        request_id:
-          description: Request ID optionally generated from the service. It can be communicated to xayn to help debugging.
-          type: string
-        kind:
-          description: What kind of error this is.
-          type: string
-        details:
-          description: Additional error details. Might differ depending on debug options.
-          type: object
     PersonalizedDocumentData:
       type: object
       required: [id, score]
@@ -139,7 +108,7 @@ components:
             $ref: '#/components/schemas/PersonalizedDocumentData'
     PersonalizedDocumentsError:
       allOf:
-        - $ref: '#/components/schemas/BaseError'
+        - $ref: './schemas/error.yml#/BaseError'
         - type: object
           required: [kind]
           properties:
@@ -166,7 +135,7 @@ components:
             $ref: '#/components/schemas/UserInteractionData'
     UserInteractionError:
       allOf:
-        - $ref: '#/components/schemas/BaseError'
+        - $ref: './schemas/error.yml#/BaseError'
         - type: object
           required: [kind]
           properties:

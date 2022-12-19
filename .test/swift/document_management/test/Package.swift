@@ -11,10 +11,10 @@ let package = Package(
         ],
     targets: [
         .target(
-            name: "DocumentApi",
+            name: "BackOfficeApi",
             dependencies: []),
         .testTarget(
-            name: "DocumentTests",
+            name: "BackOfficeTests",
             dependencies: [.product(name: "OpenAPIClient", package: "document_management")]
             )
     ]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-source global_functions.sh
+source ./global_functions.sh
 
 # Set this to debug the execution of shell commands
 # set -o xtrace
