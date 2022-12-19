@@ -20,24 +20,24 @@
     factory(require("expect.js"), require(process.cwd() + "/src/index"));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.XaynDocumentManagementSdk);
+    factory(root.expect, root.XaynBackOfficeSdk);
   }
-})(this, function (expect, XaynDocumentManagementSdk) {
+})(this, function (expect, XaynBackOfficeSdk) {
   "use strict";
 
   var api;
 
   beforeEach(function () {
-    let client = new XaynDocumentManagementSdk.ApiClient(
+    let client = new XaynBackOfficeSdk.ApiClient(
       process.env.npm_config_endpoint
     );
     let api_key = client.authentications["ApiKeyAuth"];
     api_key.apiKey = process.env.npm_config_token;
 
-    api = new XaynDocumentManagementSdk.DocumentsApi(client);
+    api = new XaynBackOfficeSdk.BackOfficeApi(client);
   });
 
-  describe("DocumentsApi", function () {
+  describe("BackOfficeApi", function () {
     describe("ingestDocuments", function () {
       it("should call ingestDocuments successfully", function (done) {
         api

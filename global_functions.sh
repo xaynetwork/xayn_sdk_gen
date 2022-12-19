@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 function codegen() {
   DIRS=("document_management" "user_management")
 

@@ -1,4 +1,4 @@
-source global_vars.sh
+source ./global_vars.sh
 
 LANG="java"
 WKDIR_DOCUMENTS="./targets/$LANG/document_management"

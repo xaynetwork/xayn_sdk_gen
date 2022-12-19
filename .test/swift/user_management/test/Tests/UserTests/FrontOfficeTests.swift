@@ -10,7 +10,7 @@ enum TestError: Error {
     case runtimeError(String)
 }
 
-class UserTest: XCTestCase {
+class FrontOfficeTests: XCTestCase {
     let testTimeout = 4.0
     let endpoint : String? = ProcessInfo.processInfo.environment["ENDPOINT"]
     let token  : String? = ProcessInfo.processInfo.environment["TOKEN_USERS"]
@@ -43,7 +43,7 @@ class UserTest: XCTestCase {
                                                     [UserInteractionData(id: "test_A", type: UserInteractionType.positive), UserInteractionData(id: "test_B", type: UserInteractionType.positive)]
         )
         
-        UsersAPI.documentInteraction(userId: userId, userInteractionRequest: interaction) { response, error in
+        FrontOfficeAPI.documentInteraction(userId: userId, userInteractionRequest: interaction) { response, error in
             guard error == nil else {
                 printError(error)
                 
@@ -63,7 +63,7 @@ class UserTest: XCTestCase {
         let expectation = self.expectation(description: "Test: User getPersonalizedDocuments")
         let userId = "simon" // String | Id of the
         
-        UsersAPI.getPersonalizedDocuments(userId: userId) { response, error in
+        FrontOfficeAPI.getPersonalizedDocuments(userId: userId) { response, error in
             guard error == nil else {
                 printError(error)
                 
