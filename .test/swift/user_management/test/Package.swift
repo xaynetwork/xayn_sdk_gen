@@ -15,7 +15,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "FrontOfficeTests",
-            dependencies: [.product(name: "OpenAPIClient", package: "user_management")]
+            dependencies: [.product(name: "XaynFrontOfficeSdk", package: "user_management")]
             )
     ]
 )

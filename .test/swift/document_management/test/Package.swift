@@ -15,7 +15,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "BackOfficeTests",
-            dependencies: [.product(name: "OpenAPIClient", package: "document_management")]
+            dependencies: [.product(name: "XaynBackOfficeSdk", package: "document_management")]
             )
     ]
 )
