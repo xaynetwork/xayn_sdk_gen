@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import XCTest
-@testable import OpenAPIClient
+@testable import XaynBackOfficeSdk
 
 
 enum TestError: Error {
@@ -25,8 +25,8 @@ class BackOfficeTests: XCTestCase {
         assert(endpoint != nil, "Missing ENDPOINT in env")
         assert(token != nil, "Missing TOKEN_DOCUMENTS in env")
         
-        OpenAPIClientAPI.basePath = endpoint!
-        OpenAPIClientAPI.customHeaders["authorizationToken"] = token!
+        XaynBackOfficeSdk.basePath = endpoint!
+        XaynBackOfficeSdk.customHeaders["authorizationToken"] = token!
     }
     
     override func tearDown() {
