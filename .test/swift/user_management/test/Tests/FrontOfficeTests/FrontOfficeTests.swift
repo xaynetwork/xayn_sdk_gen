@@ -38,7 +38,7 @@ class FrontOfficeTests: XCTestCase {
         print("Calling /users/{user_id}/interaction ...")
         
         let expectation = self.expectation(description: "Test: User Interaction")
-        let userId = "simon" // String | Id of the userÏ
+        let userId = "simon" // String | Id of the user
         let interaction = UserInteractionRequest(documents:
                                                     [UserInteractionData(id: "test_A", type: UserInteractionType.positive), UserInteractionData(id: "test_B", type: UserInteractionType.positive)]
         )
@@ -61,7 +61,7 @@ class FrontOfficeTests: XCTestCase {
         print("Calling /users/{user_id}/personalized_documents ...")
         
         let expectation = self.expectation(description: "Test: User getPersonalizedDocuments")
-        let userId = "simon" // String | Id of the
+        let userId = "simon_no_results" // String | Id of the user
         
         FrontOfficeAPI.getPersonalizedDocuments(userId: userId) { response, error in
             guard error == nil else {
