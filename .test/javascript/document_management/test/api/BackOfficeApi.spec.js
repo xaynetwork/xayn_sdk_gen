@@ -42,109 +42,145 @@
       it("should call createDocuments successfully", function (done) {
         api
           .createDocuments({
-            ingestionRequest: {
-              documents: [
-                {
-                  id: "test_A",
-                  snippet: "test A",
-                  properties: {
-                    category: "test",
-                  },
+            documents: [
+              {
+                id: "test_A",
+                snippet: "test A",
+                properties: {
+                  category: "test",
                 },
-                {
-                  id: "test_B",
-                  snippet: "test B",
-                  properties: {
-                    category: "test",
-                  },
+              },
+              {
+                id: "test_B",
+                snippet: "test B",
+                properties: {
+                  category: "test",
                 },
-                {
-                  id: "test_C",
-                  snippet: "test C",
-                  properties: {
-                    category: "test",
-                  },
+              },
+              {
+                id: "test_C",
+                snippet: "test C",
+                properties: {
+                  category: "test",
                 },
-                {
-                  id: "test_D",
-                  snippet: "test D",
-                  properties: {
-                    category: "test",
-                  },
+              },
+              {
+                id: "test_D",
+                snippet: "test D",
+                properties: {
+                  category: "test",
                 },
-              ],
-            },
+              },
+            ],
           })
           .then((result) => {
-            expect(result).to.be(null);
+            expect(result).to.be("");
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
             done();
           });
       });
     });
     describe("deleteDocument", function () {
       it("should call deleteDocument successfully", function (done) {
-        api.deleteDocument("test_D").then((result) => {
-          expect(result).to.be(null);
-          done();
-        });
+        api
+          .deleteDocument("test_D")
+          .then((result) => {
+            expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
       });
     });
     describe("deleteDocumentProperties", function () {
       it("should call deleteDocumentProperties successfully", function (done) {
-        api.deleteDocumentProperties("test_C").then((result) => {
-          expect(result).to.be(null);
-          done();
-        });
+        api
+          .deleteDocumentProperties("test_C")
+          .then((result) => {
+            expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
       });
     });
     describe("deleteDocumentProperty", function () {
       it("should call deleteDocumentProperty successfully", function (done) {
-        api.deleteDocumentProperty("test_B", "category").then((result) => {
-          expect(result).to.be(null);
-          done();
-        });
+        api
+          .deleteDocumentProperty("test_B", "category")
+          .then((result) => {
+            expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
       });
     });
     describe("deleteDocuments", function () {
       it("should call deleteDocuments successfully", function (done) {
         api
           .deleteDocuments({
-            deleteDocumentsRequest: {
-              documents: ["test_B", "test_C"],
-            },
+            documents: ["test_B", "test_C"],
           })
           .then((result) => {
             expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
             done();
           });
       });
     });
     describe("listDocumentProperties", function () {
       it("should call listDocumentProperties successfully", function (done) {
-        api.listDocumentProperties("test_A").then((result) => {
-          expect(result.properties.category).to.be("test");
-          done();
-        });
+        api
+          .listDocumentProperties("test_A")
+          .then((result) => {
+            expect(result.properties.category).to.be("test");
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
       });
     });
     describe("getDocumentProperty", function () {
       it("should call getDocumentProperty successfully", function (done) {
-        api.getDocumentProperty("test_A", "category").then((result) => {
-          expect(result.property).to.be("test");
-          done();
-        });
+        api
+          .getDocumentProperty("test_A", "category")
+          .then((result) => {
+            expect(result.property).to.be("test");
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
       });
     });
     describe("replaceDocumentProperties", function () {
       it("should call replaceDocumentProperties successfully", function (done) {
         api
           .replaceDocumentProperties("test_A", {
-            documentPropertiesRequest: {
-              properties: { category: "test changed A" },
-            },
+            properties: { category: "test changed A" },
           })
           .then((result) => {
             expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
             done();
           });
       });
@@ -153,10 +189,14 @@
       it("should call replaceDocumentProperty successfully", function (done) {
         api
           .replaceDocumentProperty("test_A", "category", {
-            documentPropertyRequest: { property: "test changed B" },
+            property: "test changed B",
           })
           .then((result) => {
             expect(result).to.be(null);
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
             done();
           });
       });
