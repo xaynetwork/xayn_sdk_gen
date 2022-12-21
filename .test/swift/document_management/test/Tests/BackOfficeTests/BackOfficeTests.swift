@@ -35,7 +35,7 @@ class BackOfficeTests: XCTestCase {
     }
     
     func testA_DocumentIngestion() {
-        let expectation = self.expectation(description: "Test: Should call ingestDocuments successfully")
+        let expectation = self.expectation(description: "Test: Should call createDocuments successfully")
         let request = IngestionRequest(documents: [
             IngestedDocument(id: "test_A", snippet: "The story serves as a companion piece to Renoir's 1937 film, Grand Illusion, once more bringing together men from across the broad social spectrum of French society to depict one man's Sisyphean efforts to escape captivity in a German POW camp.", properties: [  "category": "test"]),
             IngestedDocument(id: "test_B", snippet: "The tragic story of a young orphan girl who is befriended by an innocent but emotionally disabled veteran of the French Indochina War.", properties: [  "category": "test"]),
@@ -43,7 +43,7 @@ class BackOfficeTests: XCTestCase {
             IngestedDocument(id: "test_D", snippet: "Documents the lives of infamous fakers Elmyr de Hory and Clifford Irving. De Hory, who later committed suicide to avoid more prison time, made his name by selling forged works of art by painters like Picasso and Matisse. Irving was infamous for writing a fake autobiography of Howard Hughes. Welles moves between documentary and fiction as he examines the fundamental elements of fraud and the people who commit fraud at the expense of others.", properties: [  "category": "test"])
         ])
         
-        BackOfficeAPI.ingestDocuments(ingestionRequest: request){ response, error in
+        BackOfficeAPI.createDocuments(ingestionRequest: request){ response, error in
             guard error == nil else {
                 printError(error)
                 

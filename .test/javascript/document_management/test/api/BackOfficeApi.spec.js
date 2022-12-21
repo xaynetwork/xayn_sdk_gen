@@ -38,10 +38,10 @@
   });
 
   describe("BackOfficeApi", function () {
-    describe("ingestDocuments", function () {
-      it("should call ingestDocuments successfully", function (done) {
+    describe("createDocuments", function () {
+      it("should call createDocuments successfully", function (done) {
         api
-          .ingestDocuments({
+          .createDocuments({
             ingestionRequest: {
               documents: [
                 {
@@ -119,9 +119,9 @@
           });
       });
     });
-    describe("getDocumentProperties", function () {
-      it("should call getDocumentProperties successfully", function (done) {
-        api.getDocumentProperties("test_A").then((result) => {
+    describe("listDocumentProperties", function () {
+      it("should call listDocumentProperties successfully", function (done) {
+        api.listDocumentProperties("test_A").then((result) => {
           expect(result.properties.category).to.be("test");
           done();
         });
@@ -135,10 +135,10 @@
         });
       });
     });
-    describe("setDocumentProperties", function () {
-      it("should call setDocumentProperties successfully", function (done) {
+    describe("replaceDocumentProperties", function () {
+      it("should call replaceDocumentProperties successfully", function (done) {
         api
-          .setDocumentProperties("test_A", {
+          .replaceDocumentProperties("test_A", {
             documentPropertiesRequest: {
               properties: { category: "test changed A" },
             },
@@ -149,10 +149,10 @@
           });
       });
     });
-    describe("setDocumentProperty", function () {
-      it("should call setDocumentProperty successfully", function (done) {
+    describe("replaceDocumentProperty", function () {
+      it("should call replaceDocumentProperty successfully", function (done) {
         api
-          .setDocumentProperty("test_A", "category", {
+          .replaceDocumentProperty("test_A", "category", {
             documentPropertyRequest: { property: "test changed B" },
           })
           .then((result) => {

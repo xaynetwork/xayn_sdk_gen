@@ -13,3 +13,5 @@ sed -i '/^test {$/a\
     systemProperty "endpoint", System.getProperty("endpoint")\
     systemProperty "token", System.getProperty("token")
 ' $WKDIR_DOCUMENTS/build.gradle
+
+sed -i '/## Getting Started/,$d' $WKDIR_DOCUMENTS/README.md

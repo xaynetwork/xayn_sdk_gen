@@ -43,7 +43,7 @@ class FrontOfficeTests: XCTestCase {
                                                     [UserInteractionData(id: "test_A", type: UserInteractionType.positive), UserInteractionData(id: "test_B", type: UserInteractionType.positive)]
         )
         
-        FrontOfficeAPI.documentInteraction(userId: userId, userInteractionRequest: interaction) { response, error in
+        FrontOfficeAPI.updateUserInteractions(userId: userId, userInteractionRequest: interaction) { response, error in
             guard error == nil else {
                 printError(error)
                 
