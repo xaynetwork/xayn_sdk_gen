@@ -34,7 +34,6 @@ import java.util.Map;
 /**
  * API tests for BackOfficeApi
  */
-@Disabled
 public class BackOfficeApiTest {
 
     private final BackOfficeApi api = new BackOfficeApi(new ApiClient());
@@ -55,7 +54,7 @@ public class BackOfficeApiTest {
      * @throws ApiException if the Api call fails
      */
     @BeforeEach
-    public void ingestDocumentsTest() throws ApiException {
+    public void createDocumentsTest() throws ApiException {
         List<IngestedDocument> documents = new ArrayList<IngestedDocument>();
         Map<String, Object> properties = new HashMap<String, Object>();
 
@@ -67,7 +66,7 @@ public class BackOfficeApiTest {
 
         IngestionRequest ingestionRequest = new IngestionRequest().documents(documents);
 
-        api.ingestDocuments(ingestionRequest);
+        api.createDocuments(ingestionRequest);
     }
 
     /**
@@ -135,8 +134,8 @@ public class BackOfficeApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getDocumentPropertiesTest() throws ApiException {
-        DocumentPropertiesResponse response = api.getDocumentProperties("test_A");
+    public void listDocumentPropertiesTest() throws ApiException {
+        DocumentPropertiesResponse response = api.listDocumentProperties("test_A");
         assertEquals(response.getProperties().get("category"), "test");
     }
 
@@ -161,11 +160,11 @@ public class BackOfficeApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void setDocumentPropertiesTest() throws ApiException {
+    public void replaceDocumentPropertiesTest() throws ApiException {
         DocumentPropertiesRequest documentPropertiesRequest = new DocumentPropertiesRequest();
         documentPropertiesRequest.putPropertiesItem("category", "test changed A");
 
-        api.setDocumentProperties("test_A", documentPropertiesRequest);
+        api.replaceDocumentProperties("test_A", documentPropertiesRequest);
     }
 
     /**
@@ -176,10 +175,10 @@ public class BackOfficeApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void setDocumentPropertyTest() throws ApiException {
+    public void replaceDocumentPropertyTest() throws ApiException {
         DocumentPropertyRequest documentPropertyRequest = new DocumentPropertyRequest();
         documentPropertyRequest.setProperty("test changed B");
 
-        api.setDocumentProperty("test_A", "category", documentPropertyRequest);
+        api.replaceDocumentProperty("test_A", "category", documentPropertyRequest);
     }
 }

@@ -38,10 +38,10 @@
   });
 
   describe("FrontOfficeApi", function () {
-    describe("documentInteraction", function () {
-      it("should call documentInteraction successfully", function (done) {
+    describe("updateUserInteractions", function () {
+      it("should call updateUserInteractions successfully", function (done) {
         api
-          .documentInteraction("xayn_test_user", {
+          .updateUserInteractions("xayn_test_user", {
             userInteractionRequest: {
               documents: [
                 {

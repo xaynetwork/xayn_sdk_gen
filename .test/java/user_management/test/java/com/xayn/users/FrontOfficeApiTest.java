@@ -27,7 +27,6 @@ import java.util.List;
 /**
  * API tests for FrontOfficeApi
  */
-@Disabled
 public class FrontOfficeApiTest {
 
     private final FrontOfficeApi api = new FrontOfficeApi(new ApiClient());
@@ -47,7 +46,7 @@ public class FrontOfficeApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void documentInteractionTest() throws ApiException {
+    public void updateUserInteractionsTest() throws ApiException {
         UserInteractionRequest userInteractionRequest = new UserInteractionRequest();
         List<UserInteractionData> documents = new ArrayList<UserInteractionData>();
 
@@ -56,7 +55,7 @@ public class FrontOfficeApiTest {
 
         userInteractionRequest.setDocuments(documents);
 
-        api.documentInteraction("xayn_test_user", userInteractionRequest);
+        api.updateUserInteractions("xayn_test_user", userInteractionRequest);
     }
 
     /**
