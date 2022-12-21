@@ -65,12 +65,10 @@ class FrontOfficeTests: XCTestCase {
         
         FrontOfficeAPI.getPersonalizedDocuments(userId: userId) { response, error in
             guard error == nil else {
-                printError(error)
+                expectation.fulfill()
                 
                 return
             }
-            
-            expectation.fulfill()
         }
         
         self.waitForExpectations(timeout: testTimeout, handler: nil)
