@@ -51,10 +51,12 @@ function push_to_designated_repo() {
     git clone $TARGET_REPO
 
     # delete old docs/src in repo
-    rm -Rf $TARGET_NAME/docs
-    rm -Rf $TARGET_NAME/src
+    cd $TARGET_NAME
+    git rm -r '*'
+    cd -
 
     rsync -avz $SOURCE_FOLDER/ $TARGET_NAME
+    
     cd $TARGET_NAME
     ls
     git add -A
