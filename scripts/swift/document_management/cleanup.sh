@@ -8,4 +8,4 @@ rm -Rf $WKDIR_DOCUMENTS/.travis.yml
 rm -Rf $WKDIR_DOCUMENTS/git_push.sh
 cp -R $TEMPLATE_DOCUMENTS $WKDIR_DOCUMENTS/test
 
-sed -i '' -e '/## Getting Started/,$d' $WKDIR_DOCUMENTS/README.md
+sed -i '' -e '/## Documentation for API Endpoints/,$d' $WKDIR_DOCUMENTS/README.md
