@@ -9,3 +9,4 @@ rm -Rf $WKDIR_DOCUMENTS/git_push.sh
 cp -R $TEMPLATE_DOCUMENTS $WKDIR_DOCUMENTS/test
 
 sed -i '/## Getting Started/,$d' $WKDIR_DOCUMENTS/README.md
+sed -i -e '$r ./.readme/javascript/back_office.md' -e '$a\' $WKDIR_DOCUMENTS/README.md

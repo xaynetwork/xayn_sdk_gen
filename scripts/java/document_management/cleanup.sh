@@ -15,3 +15,4 @@ sed -i '/^test {$/a\
 ' $WKDIR_DOCUMENTS/build.gradle
 
 sed -i '/## Getting Started/,$d' $WKDIR_DOCUMENTS/README.md
+sed -i -e '$r ./.readme/java/back_office.md' -e '$a\' $WKDIR_DOCUMENTS/README.md
