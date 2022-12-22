@@ -9,4 +9,4 @@ rm -Rf $WKDIR_DOCUMENTS/git_push.sh
 cp -R $TEMPLATE_DOCUMENTS $WKDIR_DOCUMENTS/test
 
 sed -i '' -e '/## Documentation for API Endpoints/,$d' $WKDIR_DOCUMENTS/README.md
-sed -i -e '$r ./.readme/swift/back_office.md' -e '$a\' $WKDIR_DOCUMENTS/README.md
+sed -i .bak -e '$r ./.readme/swift/back_office.md' -e '$a\' $WKDIR_DOCUMENTS/README.md
