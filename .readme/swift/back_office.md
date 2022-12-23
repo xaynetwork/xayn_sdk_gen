@@ -51,8 +51,8 @@ let request = IngestionRequest(documents: [
 ])
         
 BackOfficeAPI.createDocuments(ingestionRequest: request){ response, error in
-    guard error == nil else {
-        printError(error)
+    if let error = error else {
+        print("\(error)")
         
         return
     }
